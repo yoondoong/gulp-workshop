@@ -6,12 +6,27 @@
 // including plugins
 const gulp = require('gulp');
 const pug = require('gulp-pug');
+const browserSync = require('browser-sync').create();
 
-// task
 gulp.task('compile-pug', () => {
   gulp.src('./src/pug/*.pug') // path to your file
     .pipe(pug())
-    .pipe(gulp.dest('./public/html/'));
+    .pipe(gulp.dest('./public/html/'))
+    .pipe(browserSync.reload({
+      stream: true,
+    }));
+});
+
+gulp.task('watch', ['browserSync'], () => {
+  gulp.watch('./src/pug/*.pug', ['compile-pug']);
+});
+
+gulp.task('browserSync', () => {
+  browserSync.init({
+    server: {
+      baseDir: 'public/html',
+    }
+  });
 });
 
 // pug
