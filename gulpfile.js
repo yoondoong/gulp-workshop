@@ -5,13 +5,13 @@
 
 // including plugins
 const gulp = require('gulp');
-const sass = require('gulp-sass');
+const pug = require('gulp-pug');
 
 // task
-gulp.task('compile-style', () => {
-  gulp.src('./src/*.scss') // path to your file
-    .pipe(sass())
-    .pipe(gulp.dest('./public/'));
+gulp.task('compile-pug', () => {
+  gulp.src('./src/pug/*.pug') // path to your file
+    .pipe(pug())
+    .pipe(gulp.dest('./public/html/'));
 });
 
 // pug
