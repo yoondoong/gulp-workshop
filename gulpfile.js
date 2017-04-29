@@ -18,7 +18,7 @@ const imagemin = require('gulp-imagemin');
 gulp.task('coffee', function() {
   gulp.src('./src/*.coffee')
     .pipe(coffeescript())
-    .pipe(gulp.dest('./public/js'))
+    .pipe(gulp.dest('./public'))
     .pipe(browserSync.reload({
       stream: true,
     }));
@@ -27,7 +27,7 @@ gulp.task('coffee', function() {
 gulp.task('compile-pug', () => {
   gulp.src('./src/pug/*.pug') // path to your file
     .pipe(pug())
-    .pipe(gulp.dest('./public/html/'))
+    .pipe(gulp.dest('./public'))
     .pipe(browserSync.reload({
       stream: true,
     }));
@@ -36,7 +36,7 @@ gulp.task('compile-pug', () => {
 gulp.task('sass', () => {
   return gulp.src('./src/style/*.scss')
     .pipe(sass()) // Using gulp-sass
-    .pipe(gulp.dest('./public/style'))
+    .pipe(gulp.dest('./public'))
     .pipe(browserSync.reload({
       stream: true,
     }));
@@ -52,16 +52,15 @@ gulp.task('watch', ['browserSync'], () => {
 gulp.task('browserSync', () => {
   browserSync.init({
     server: {
-      baseDir: 'public/html',
+      baseDir: 'public',
     }
   });
 });
 
 gulp.task('useref', () => {
-  return gulp.src('public/html')
+  return gulp.src('public')
     .pipe(useref())
     .pipe(gulpIf('*.js', uglify()))
-    // Minifies only if it's a CSS file
     .pipe(gulpIf('*.css', cssnano()))
     .pipe(gulp.dest('public/dist'));
 });
