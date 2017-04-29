@@ -19,7 +19,9 @@
   "homepage": "https://github.com/dartmouth-cs52-17S/starterpack-zchr#readme",
   "devDependencies": {
     "browser-sync": "^2.18.8",
+    "gulp": "^3.9.1",
     "gulp-coffeescript": "0.0.10",
+    "gulp-cssnano": "^2.1.2",
     "gulp-if": "^2.0.2",
     "gulp-imagemin": "^3.2.0",
     "gulp-pug": "^3.3.0",
