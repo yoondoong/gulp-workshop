@@ -79,7 +79,7 @@ gulp.task('images', () => {
 });
 
 
-gulp.task('default', ['watch'], function () {
+gulp.task('default', ['compile-pug','sass','coffee','watch'], function () {
     // This will only run if the lint task is successful...
 });
 
