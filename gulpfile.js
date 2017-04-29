@@ -9,11 +9,16 @@ const pug = require('gulp-pug');
 const browserSync = require('browser-sync').create();
 const sass = require('gulp-sass');
 const coffeescript = require('gulp-coffeescript');
+const useref = require('gulp-useref');
+const uglify = require('gulp-uglify');
+const gulpIf = require('gulp-if');
+const cssnano = require('gulp-cssnano');
+const imagemin = require('gulp-imagemin');
 
 gulp.task('coffee', function() {
   gulp.src('./src/*.coffee')
-    .pipe(coffeescript({bare: true}).on('error', gutil.log))
-    .pipe(gulp.dest('./public/js')).
+    .pipe(coffeescript())
+    .pipe(gulp.dest('./public/js'))
     .pipe(browserSync.reload({
       stream: true,
     }));
