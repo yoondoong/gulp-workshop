@@ -14,6 +14,7 @@ const uglify = require('gulp-uglify');
 const gulpIf = require('gulp-if');
 const cssnano = require('gulp-cssnano');
 const imagemin = require('gulp-imagemin');
+const pugLinter = require('gulp-pug-linter');
 
 gulp.task('coffee', function() {
   gulp.src('./src/*.coffee')
@@ -27,15 +28,24 @@ gulp.task('coffee', function() {
 gulp.task('compile-pug', () => {
   gulp.src('./src/pug/*.pug') // path to your file
     .pipe(pug())
+    .on('error', onError)
     .pipe(gulp.dest('./public'))
     .pipe(browserSync.reload({
       stream: true,
     }));
 });
 
+gulp.task('lint-pug', () => {
+  return gulp
+    .src('./src/pug/*.pug')
+    .pipe(pugLinter())
+    .pipe(pugLinter.reporter())
+})
+
 gulp.task('sass', () => {
   return gulp.src('./src/style/*.scss')
     .pipe(sass()) // Using gulp-sass
+    .on('error', onError)
     .pipe(gulp.dest('./public'))
     .pipe(browserSync.reload({
       stream: true,
@@ -43,6 +53,7 @@ gulp.task('sass', () => {
 });
 
 gulp.task('watch', ['browserSync'], () => {
+  gulp.watch('./src/pug/*.pug', ['lint-pug']);
   gulp.watch('./src/pug/*.pug', ['compile-pug']);
   gulp.watch('./src/style/*.scss', ['sass']);
   gulp.watch('./src/coffee/*.coffee',['coffee']);
@@ -70,6 +81,13 @@ gulp.task('images', () => {
   .pipe(imagemin())
   .pipe(gulp.dest('dist/images'));
 });
+
+function onError(err) {
+  console.log(err);
+  this.emit('end');
+}
+
+gulp.task('default', ['watch'], () => {});
 
 // pug
 // minify html
