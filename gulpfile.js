@@ -88,8 +88,6 @@ function onError(err) {
   this.emit('end');
 }
 
-gulp.task('default', ['watch'], () => {});
-
 // pug
 // minify html
 // typescript
