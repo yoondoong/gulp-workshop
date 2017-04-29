@@ -19,7 +19,6 @@ gulp.task('coffee', function() {
     }));
 });
 
-
 gulp.task('compile-pug', () => {
   gulp.src('./src/pug/*.pug') // path to your file
     .pipe(pug())
@@ -40,7 +39,10 @@ gulp.task('sass', () => {
 
 gulp.task('watch', ['browserSync'], () => {
   gulp.watch('./src/pug/*.pug', ['compile-pug']);
+  gulp.watch('./src/style/*.scss', ['sass']);
+  gulp.watch('./src/coffee/*.coffee',['coffee']);
 });
+
 
 gulp.task('browserSync', () => {
   browserSync.init({
@@ -48,6 +50,21 @@ gulp.task('browserSync', () => {
       baseDir: 'public/html',
     }
   });
+});
+
+gulp.task('useref', () => {
+  return gulp.src('public/html')
+    .pipe(useref())
+    .pipe(gulpIf('*.js', uglify()))
+    // Minifies only if it's a CSS file
+    .pipe(gulpIf('*.css', cssnano()))
+    .pipe(gulp.dest('public/dist'));
+});
+
+gulp.task('images', () => {
+  return gulp.src('src/images/**/*.+(png|jpg|gif|svg)')
+  .pipe(imagemin())
+  .pipe(gulp.dest('dist/images'));
 });
 
 // pug
