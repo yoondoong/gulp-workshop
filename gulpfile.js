@@ -15,8 +15,8 @@ const gulpIf = require('gulp-if');
 const cssnano = require('gulp-cssnano');
 const imagemin = require('gulp-imagemin');
 
-gulp.task('coffee', function() {
-  gulp.src('./src/*.coffee')
+gulp.task('coffee', () => {
+  gulp.src('./src/coffee/*.coffee')
     .pipe(coffeescript())
     .pipe(gulp.dest('./public'))
     .pipe(browserSync.reload({
