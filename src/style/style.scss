@@ -1,5 +1,5 @@
-$flashcard-width: 500px;
-$flashcard-height: 300px;
+$flashcard-width: 450px;
+$flashcard-height: 275px;
 $light-blue: #d6f8ff;
 $blue: #00d2fd;
 $big-font: 5em;
@@ -14,14 +14,40 @@ h1 {
   font-size: $big-font / 1.5;
 }
 
+hr { /* styling from http://stackoverflow.com/questions/6382023/changing-the-color-of-an-hr-element */
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid #ccc;
+}
+
+code {
+  display: block;
+  background-color: #eee;
+  font-size: 1.2em;
+  padding: 5px;
+  border-radius: 2px;
+}
+
 .container, .flashcard, input {
   margin: 0 auto;
 }
 
 .container {
-  width: 80%;
-  max-width: 790px;
+  width: 90%;
+  max-width: 900px;
   min-width: $flashcard-width + 100;
+
+  .content {
+    margin-top: 15px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    > div {
+      margin: 15px;
+    }
+  }
 
   .flashcard {
     width: $flashcard-width;
