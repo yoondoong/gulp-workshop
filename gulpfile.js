@@ -3,21 +3,62 @@
  * https://julienrenaux.fr/2014/05/25/introduction-to-gulp-js-with-practical-examples/
 */
 
-// including plugins
+// Include Gulp
 const gulp = require('gulp');
+
+
+// Include Our Plugins
 const pug = require('gulp-pug');
-const browserSync = require('browser-sync').create();
-const sass = require('gulp-sass');
-const coffeescript = require('gulp-coffeescript');
-const useref = require('gulp-useref');
-const uglify = require('gulp-uglify');
-const gulpIf = require('gulp-if');
-const cssnano = require('gulp-cssnano');
-const imagemin = require('gulp-imagemin');
-const concat = require('gulp-concat');
-const rename = require('gulp-rename');
 const pugLinter = require('gulp-pug-linter');
 
+const browserSync = require('browser-sync').create();
+
+const coffeescript = require('gulp-coffeescript');
+const uglify = require('gulp-uglify');
+
+const sass = require('gulp-sass');
+const cssnano = require('gulp-cssnano');
+
+// These aren't explicitly in the README!
+const useref = require('gulp-useref');
+const gulpIf = require('gulp-if');
+const imagemin = require('gulp-imagemin');
+
+/* INTERNAL ISSUE: not used */
+const concat = require('gulp-concat');
+const rename = require('gulp-rename');
+
+// Compile Pug with linter
+gulp.task('compile-pug', () => {
+  // task goes here
+
+  gulp.src('./src/pug/*.pug')
+    .pipe(pug())
+    .on('error', onError)
+    .pipe(gulp.dest('./public'))
+    .pipe(browserSync.reload({
+      stream: true,
+    }));
+
+});
+
+gulp.task('lint-pug', () => {
+  return gulp
+    .src('./src/pug/*.pug')
+    .pipe(pugLinter())
+    .pipe(pugLinter.reporter())
+})
+
+// browserSync task
+gulp.task('browserSync', () => {
+  browserSync.init({
+    server: {
+      baseDir: 'public',
+    }
+  });
+});
+
+// Compile our coffeescript
 gulp.task('coffee', () => {
   gulp.src('./src/coffee/*.coffee')
     .pipe(coffeescript())
@@ -28,23 +69,7 @@ gulp.task('coffee', () => {
     }));
 });
 
-gulp.task('compile-pug', () => {
-  gulp.src('./src/pug/*.pug')
-    .pipe(pug())
-    .on('error', onError)
-    .pipe(gulp.dest('./public'))
-    .pipe(browserSync.reload({
-      stream: true,
-    }));
-});
-
-gulp.task('lint-pug', () => {
-  return gulp
-    .src('./src/pug/*.pug')
-    .pipe(pugLinter())
-    .pipe(pugLinter.reporter())
-})
-
+// Compile sass
 gulp.task('sass', () => {
   return gulp.src('./src/style/*.scss')
     .pipe(sass())
@@ -56,6 +81,7 @@ gulp.task('sass', () => {
     }));
 });
 
+// watch
 gulp.task('watch', ['browserSync'], () => {
   gulp.watch('./src/pug/*.pug', ['lint-pug']);
   gulp.watch('./src/pug/*.pug', ['compile-pug']);
@@ -63,24 +89,21 @@ gulp.task('watch', ['browserSync'], () => {
   gulp.watch('./src/coffee/*.coffee',['coffee']);
 });
 
-
-gulp.task('browserSync', () => {
-  browserSync.init({
-    server: {
-      baseDir: 'public',
-    }
-  });
+// default gulp
+gulp.task('default', ['compile-pug','sass','coffee','watch'], function () {
+    // This will only run if the lint task is successful...
 });
 
+function onError(err) {
+  console.log(err);
+  this.emit('end');
+}
+
+// EVERYTHING AFTER HERE IS NOT REFERENCED IN THE README
 gulp.task('images', () => {
   return gulp.src('src/image/*.+(png|jpg|gif|svg)')
   .pipe(imagemin())
   .pipe(gulp.dest('public/image'));
-});
-
-
-gulp.task('default', ['compile-pug','sass','coffee','watch'], function () {
-    // This will only run if the lint task is successful...
 });
 
 /* if you have multiple js files linked to your html file,
@@ -93,16 +116,3 @@ gulp.task('useref', function(){
     .pipe(gulp.dest('dist'))
 });
 */
-
-function onError(err) {
-  console.log(err);
-  this.emit('end');
-}
-
-// pug
-// minify html
-// typescript
-// javascript minify -- uglify
-// scss/less files
-// minify css
-// hot reloading
