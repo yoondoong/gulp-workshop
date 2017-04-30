@@ -1,14 +1,28 @@
 doctype html
 html
   head
-    link(rel='stylesheet', href ='style.css')
-    link(href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet')
+    link(rel='stylesheet', href='style.css')
     script(src='https://code.jquery.com/jquery-3.2.1.min.js',integrity='sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=', crossorigin='anonymous')
   body
-    h1 Hello World!!!!!!!!!
     div(class='container')
-      p here's a random word:
-      span(class='random-word')
-    div
-      input(type='button', value='get a random word')
+      h1 Hey there, CS 52
+      hr
+      div(class='content')
+        div
+          p HTML, CSS, and Vanilla JavaScript are, well, vanilla. We built this website using the new tools that people have introduced to the class:
+          ul
+            li CoffeeScript instead of JS,
+            li Pug to create HTML, and
+            li SASS to style
+          p Gulp, a task runner, makes it super easy to use these tools of choice. Just run the command 
+          code $ gulp
+          p and all of your fancy schmany languages will compile into something your browser understands. Furthermore, you'll get linting and hot reloading. AND, the automated tasks are uber terse, so you know what's going on under the hood. 
+        div  
+          div(class='flashcard')
+            div(class='head')
+              p here's a random word from 
+                a(href='https://wordnik.com') Wordnik
+            div(class='body')  
+              span(class='random-word')
+          input(type='button', value='get a random word')
     script(src='wordnik.js')

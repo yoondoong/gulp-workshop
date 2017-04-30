@@ -29,7 +29,7 @@ gulp.task('coffee', () => {
 });
 
 gulp.task('compile-pug', () => {
-  gulp.src('./src/pug/*.pug') // path to your file
+  gulp.src('./src/pug/*.pug')
     .pipe(pug())
     .on('error', onError)
     .pipe(gulp.dest('./public'))
@@ -47,7 +47,7 @@ gulp.task('lint-pug', () => {
 
 gulp.task('sass', () => {
   return gulp.src('./src/style/*.scss')
-    .pipe(sass()) // Using gulp-sass
+    .pipe(sass())
     .pipe(cssnano())
     .on('error', onError)
     .pipe(gulp.dest('./public'))
@@ -83,6 +83,16 @@ gulp.task('default', ['compile-pug','sass','coffee','watch'], function () {
     // This will only run if the lint task is successful...
 });
 
+/* if you have multiple js files linked to your html file,
+   you can compress them into a single one 'main.min.js' file
+gulp.task('useref', function(){
+  return gulp.src('public/*.html')
+    .pipe(useref())
+    // Minifies only if it's a JavaScript file
+    .pipe(gulpIf('*.js', uglify()))
+    .pipe(gulp.dest('dist'))
+});
+*/
 
 function onError(err) {
   console.log(err);
