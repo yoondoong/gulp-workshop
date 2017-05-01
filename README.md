@@ -249,7 +249,7 @@ To call the default task, just run
 
 :computer: `gulp`
 
-You ought to have a finished product that looks something like this
+You ought to have a finished product that looks something like this:
 
 ![final website](/images/final.png)
 
