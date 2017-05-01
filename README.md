@@ -81,6 +81,8 @@ function onError(err) {
 }
 ```
 
+The **onError** function prevents the default gulp command from exiting if there are errors in the Pug file (which can be annoying if you would like gulp to run continuously while you're working).
+
 What about that linter we installed? Let's make a task for that, too.
 
 :rocket: Below that last task, add
@@ -242,8 +244,6 @@ gulp.task('default', ['compile-pug','sass','coffee','watch'], function () {
     // This will only run if the lint task is successful...
 });
 ```
-
-The **onError** function prevents the default gulp command from exiting if there are errors in the Pug file (which can be annoying if you would like gulp to run continuously while you're working).
 
 To call the default task, just run
 
