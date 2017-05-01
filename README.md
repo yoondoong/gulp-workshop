@@ -28,7 +28,7 @@ Much like how node gets marching orders from `package.json`, gulp reads all of i
 
 :rocket: Open **`gulpfile.js`** Let's make sure that we can use gulp. Under where it says `//Include Gulp`, add:
 
-:computer: `const gulp = require('gulp');`
+:rocket: `const gulp = require('gulp');`
 
 Great! Now on to the plugins that we'll need.
 
@@ -85,7 +85,7 @@ The **onError** function prevents the default gulp command from exiting if there
 
 What about that linter we installed? Let's make a task for that, too.
 
-:rocket: Below that last task, add
+:rocket: Below the 'compile-pug' task, add
 ```
 gulp.task('lint-pug', () => {
   return gulp
@@ -134,13 +134,13 @@ to see your website locally hosted (a browser window should pop up)!
 
 Let's take it a step further. It's nice if we don't have to call browserSync every time we compile our pug file, right? Let's add browseSync into our `compile-pug` task like so:
 
-:rocket: At the end of the `compile-pug` method, add in the following:
+:rocket: Append another pipe inside the `compile-pug` method directly after `.pipe(gulp.dest('./public'))`:
 ```
 .pipe(browserSync.reload({
       stream: true,
     }));
 ```
-Now you can testing it! Let's change `h1 Hey there, CS52` to `h1 Welcome to the Gulp workshop!`. After you save the change, call `gulp compile-pug`again, the browser window will pop up, reflecting the change you just made!
+Now you can testing it! In the Pug file, let's change `h1 Hey there, CS52` to `h1 Welcome to the Gulp workshop!`. After you save the change, call `gulp compile-pug` again and call `gulp browserSync`. The browser window will pop up, reflecting the change you just made!
 
 -----
 
@@ -178,9 +178,9 @@ What's going on?
  5. tell browserSync to reload the page (like we did with Pug)
 
 Now in your terminal, run:
-:computer: `gulp coffeescript`
+:computer: `gulp coffee`
 
-Go have a look at the `/public` directory and open the shiny, new `.js` file. It's smushed into one line to make the file size smaller.
+Go have a look at the `/public` directory and open the shiny, new `.js` file. It's smushed into one line to make the file size smaller. Now when you run `gulp browserSync` again, you can click on the button and get a random word!
 
 ---
 
