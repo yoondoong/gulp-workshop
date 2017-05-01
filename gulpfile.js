@@ -19,14 +19,6 @@ const uglify = require('gulp-uglify');
 const sass = require('gulp-sass');
 const cssnano = require('gulp-cssnano');
 
-// These aren't explicitly in the README!
-const useref = require('gulp-useref');
-const gulpIf = require('gulp-if');
-const imagemin = require('gulp-imagemin');
-
-/* INTERNAL ISSUE: not used */
-const concat = require('gulp-concat');
-const rename = require('gulp-rename');
 
 // Compile Pug with linter
 gulp.task('compile-pug', () => {
@@ -99,21 +91,3 @@ function onError(err) {
   console.log(err);
   this.emit('end');
 }
-
-// EVERYTHING AFTER HERE IS NOT REFERENCED IN THE README
-gulp.task('images', () => {
-  return gulp.src('src/image/*.+(png|jpg|gif|svg)')
-  .pipe(imagemin())
-  .pipe(gulp.dest('public/image'));
-});
-
-/* if you have multiple js files linked to your html file,
-   you can compress them into a single one 'main.min.js' file
-gulp.task('useref', function(){
-  return gulp.src('public/*.html')
-    .pipe(useref())
-    // Minifies only if it's a JavaScript file
-    .pipe(gulpIf('*.js', uglify()))
-    .pipe(gulp.dest('dist'))
-});
-*/
