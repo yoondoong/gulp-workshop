@@ -94,6 +94,7 @@ gulp.task('default', ['compile-pug','sass','coffee','watch'], function () {
     // This will only run if the lint task is successful...
 });
 
+// onError method
 function onError(err) {
   console.log(err);
   this.emit('end');
