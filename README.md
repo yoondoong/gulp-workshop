@@ -126,11 +126,11 @@ gulp.task('browserSync', () => {
 ```
 We specify the base directory as `public` because that's where we asked gulp to pipe the compiled files.
 
-Try runing
+Try running
 :computer: `gulp browserSync`
 to see your website locally hosted (a browser window should pop up)!
 
-Let's take it a step further. It's nice if we don't have to call browserSync everytime we compile our pug file, right? Let's add browseSync into our `compile-pug` task like so:
+Let's take it a step further. It's nice if we don't have to call browserSync every time we compile our pug file, right? Let's add browseSync into our `compile-pug` task like so:
 
 :rocket: At the end of the `compile-pug` method, add in the following:
 ```
@@ -144,7 +144,7 @@ Now you can testing it! Let's change `h1 Hey there, CS52` to `h1 Welcome to the 
 
 ### CoffeeScript
 
-What if we want our page to be interactive? We need some sort of JavaScript. We wrote a `.coffee` file so need to copmpile it. `gulp-coffescript` can achieve this for us easily! And `gulp-uglify` minimizes the resulting `.js` file nicely!
+What if we want our page to be interactive? We need some sort of JavaScript. We wrote a `.coffee` file so need to compile it. `gulp-coffescript` can achieve this for us easily! And `gulp-uglify` minimizes the resulting `.js` file nicely!
 
 First download the plugins:
 :computer: `npm install --save-dev gulp-coffeescript gulp-uglify`
@@ -178,7 +178,7 @@ What's going on?
 Now in your terminal, run:
 :computer: `gulp coffeescript`
 
-Go have a look at the `/public` directory and open the shiny, new `.js` file. It's smushed into one line to make the filesize smaller.
+Go have a look at the `/public` directory and open the shiny, new `.js` file. It's smushed into one line to make the file size smaller.
 
 ---
 
@@ -194,7 +194,7 @@ Let's download the plugin:
 const sass = require('gulp-sass');
 const cssnano = require('gulp-cssnano');
 ```
-What are they used for? `sass` compiles our scss files into css files, and `cssnano` minimizes css files.
+What are they used for? `sass` compiles our `.scss` files into css files, and `cssnano` minimizes CSS files.
 
 :rocket: Time for another gulp task. Under `// Compile sass` add:
 ```
@@ -262,4 +262,4 @@ At this point you should have ...
 - [ ] compiled and minified all of the files in `src/`
 - [ ] hot reloading for local testing
 - [ ] error checking
-- [ ] an undersanding of how cool gulp is!
+- [ ] an understanding of how cool gulp is!
