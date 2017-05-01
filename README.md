@@ -251,7 +251,7 @@ To call the default task, just run
 
 You ought to have a finished product that looks something like this
 
-![final website][/images/final.png]
+![final website](/images/final.png)
 
 and automatically updates if you change any `.coffee`, `.scss`, or `.pug` file.
 
